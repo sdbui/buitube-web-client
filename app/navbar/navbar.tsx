@@ -9,6 +9,7 @@ import {
     useEffect,
 } from 'react';
 import { User } from 'firebase/auth';
+import Upload from "./upload";
 
 
 export default function Navbar () {
@@ -31,11 +32,8 @@ export default function Navbar () {
             <Link href="/">
                 <Image src="/youtube.svg" alt="youtube logo" width={90} height={50}></Image>
             </Link>
-            <Link href="/watch"> Watch </Link>
-            {
-                // todo add upload
-            }
-            <SignIn user={user}/>
+            {user ? <Upload></Upload> : null}
+            <SignIn user={user as User}/>
         </nav>
     )
 }

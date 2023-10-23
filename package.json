@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "dockerbuild": "docker build -t us-west2-docker.pkg.dev/buitube/buitube-web-client-repo/buitube-web-client . --platform linux/amd64"
   },
   "dependencies": {
     "encoding": "^0.1.13",
