@@ -10,6 +10,9 @@
     "dockerbuild": "docker build -t us-west2-docker.pkg.dev/buitube/buitube-web-client-repo/buitube-web-client . --platform linux/amd64"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/joy": "^5.0.0-beta.11",
     "encoding": "^0.1.13",
     "firebase": "^10.5.0",
     "next": "^13.4.16",
