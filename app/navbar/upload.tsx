@@ -72,9 +72,7 @@ export default function Upload () {
     <>
       <input id="upload" className={styles.uploadInput} type="file" onChange={handleFileChange} />
       <label htmlFor="upload" className={styles.uploadButton}>
-        <IconButton>
-          <VideoCallIcon className={styles.uploadButton}/>
-        </IconButton>
+        <VideoCallIcon className={styles.uploadButton}/>
       </label>
       <Modal open={showModal} onClose={()=>setShowModal(false)}>
         <ModalDialog>

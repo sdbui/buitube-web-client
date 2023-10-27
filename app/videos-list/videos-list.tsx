@@ -51,9 +51,9 @@ export default function VideosList ({videos} : IVideos) {
   if (loading) {
     return (
       <Sheet sx={{display: 'flex', gap: 2, flexWrap: 'wrap'}}>
-        {[...Array(5)].map(x => {
+        {[...Array(5)].map((_x,i) => {
           return (
-            <Card variant="outlined" sx={{width: 343, display: 'flex', gap: 2}}>
+            <Card key={i} variant="outlined" sx={{width: 343, display: 'flex', gap: 2}}>
               <AspectRatio ratio="21/9">
                 <Skeleton variant="overlay"></Skeleton>
               </AspectRatio>
