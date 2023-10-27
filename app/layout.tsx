@@ -19,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <CssVarsProvider defaultMode='light'>
+      <CssVarsProvider defaultMode='dark'>
         <body className={inter.className}>
           <Sheet variant="outlined" sx={{height: '100vh', display: 'flex', flexDirection: 'column'}}>
             <Navbar/>

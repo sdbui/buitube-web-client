@@ -2,6 +2,7 @@
 import { useSearchParams } from 'next/navigation';
 import Sheet from '@mui/joy/Sheet';
 import styles from './watch.module.css';
+import AspectRatio from '@mui/joy/AspectRatio';
 
 
 export default function Watch() {

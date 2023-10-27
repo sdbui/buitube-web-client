@@ -13,6 +13,9 @@ import Link from 'next/link';
 import Card from '@mui/joy/Card';
 import Typography from '@mui/joy/Typography';
 import {Video} from '../page';
+import Skeleton from '@mui/joy/Skeleton';
+import AspectRatio from '@mui/joy/AspectRatio';
+import Sheet from '@mui/joy/Sheet';
 
 interface IVideos {
   videos: Video[];
@@ -23,6 +26,7 @@ type User = FirebaseUser & {roles: { admin?: boolean, viewer: boolean, uploader?
 export default function VideosList ({videos} : IVideos) {
 
   const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
 
@@ -35,6 +39,7 @@ export default function VideosList ({videos} : IVideos) {
           return doc.id === user?.uid;
         })
         setUser(userDoc?.data() as User);
+        setLoading(false)
       });
     })
 
@@ -43,14 +48,34 @@ export default function VideosList ({videos} : IVideos) {
     }
   },[]);
 
+  if (loading) {
+    return (
+      <Sheet sx={{display: 'flex', gap: 2, flexWrap: 'wrap'}}>
+        {[...Array(5)].map(x => {
+          return (
+            <Card variant="outlined" sx={{width: 343, display: 'flex', gap: 2}}>
+              <AspectRatio ratio="21/9">
+                <Skeleton variant="overlay"></Skeleton>
+              </AspectRatio>
+              <Typography>
+                <Skeleton>
+                  Hey, this is some temporary text. If you are reading this... why? there is nothing for you here. Turn around
+                </Skeleton>
+              </Typography>
+            </Card>
+          )
+        })}
+      </Sheet>)
+  }
+
   if (!user?.roles?.viewer) {
     return (<>
-      <p>YOU DONT HAVE ACCESS LMAO</p>
+        <Typography sx={{textAlign: 'center', marginTop: '100px'}} level="title-lg">Looks like you need access. Please contact your administrator.</Typography>
     </>)
   }
 
   return (
-    <Grid sx={{flexGrow: 1}} container spacing={2}>
+    <Grid sx={{flexGrow: 1, gap:2}} container spacing={2}>
         {
           videos.map(video => {
             return (

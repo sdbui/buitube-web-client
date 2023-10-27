@@ -86,7 +86,7 @@ export default function SignUp () {
           <FormControl error={passwordAgainInputError}>
             <FormLabel>Password again</FormLabel>
             <Input onBlur={validatePasswordAgain} onChange={(e)=> setRepeatPassword(e.target.value)} required type="password" name="password2" id="password2" placeholder="password"></Input>
-            {passwordAgainInputError && (<FormHelperText>Passwords don't match</FormHelperText>)}
+            {passwordAgainInputError && (<FormHelperText>Passwords must match</FormHelperText>)}
           </FormControl>
           <Button variant="outlined" type="submit">Sign up</Button>
 

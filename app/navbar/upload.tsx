@@ -8,9 +8,9 @@ import DialogActions from '@mui/joy/DialogActions';
 import DialogContent from '@mui/joy/DialogContent';
 import Button from '@mui/joy/Button';
 import Input from '@mui/joy/Input';
-import Stack from '@mui/joy/Stack';
 import { useState } from 'react';
 import VideoCallIcon from '@mui/icons-material/VideoCall';
+import IconButton from '@mui/joy/IconButton';
 
 
 const defaultUploadForm = {
@@ -70,10 +70,11 @@ export default function Upload () {
   }
   return (
     <>
-
       <input id="upload" className={styles.uploadInput} type="file" onChange={handleFileChange} />
       <label htmlFor="upload" className={styles.uploadButton}>
-        <VideoCallIcon className={styles.uploadButton}/>
+        <IconButton>
+          <VideoCallIcon className={styles.uploadButton}/>
+        </IconButton>
       </label>
       <Modal open={showModal} onClose={()=>setShowModal(false)}>
         <ModalDialog>
