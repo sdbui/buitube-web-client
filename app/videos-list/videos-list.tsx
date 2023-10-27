@@ -16,6 +16,7 @@ import {Video} from '../page';
 import Skeleton from '@mui/joy/Skeleton';
 import AspectRatio from '@mui/joy/AspectRatio';
 import Sheet from '@mui/joy/Sheet';
+import { useRouter } from 'next/navigation';
 
 interface IVideos {
   videos: Video[];
@@ -27,11 +28,15 @@ export default function VideosList ({videos} : IVideos) {
 
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
-
     const unsubscribe = onAuthStateChangedHelper((user) => {
-      if (!user) return;
+      if (!user) {
+        // need to be signed in in order to see videos... redirect to login
+        return router.push('/login')
+      }
+
       // we have our user from firebase auth, reference firestore user for the roles
       let coll = collection(db,'users');
       getDocs(coll).then(snapshot => {
