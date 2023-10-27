@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <CssVarsProvider defaultMode='dark'>
         <body className={inter.className}>
-          <Sheet variant="outlined" sx={{height: '100vh', display: 'flex', flexDirection: 'column'}}>
+          <Sheet variant="plain" sx={{display: 'flex', flexGrow: 1, flexDirection: 'column'}}>
             <Navbar/>
             <Sheet sx={{flexGrow: 1}}>
               {children}

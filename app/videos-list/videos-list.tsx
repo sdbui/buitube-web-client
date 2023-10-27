@@ -80,7 +80,7 @@ export default function VideosList ({videos} : IVideos) {
   }
 
   return (
-    <Grid sx={{flexGrow: 1, gap:2}} container spacing={2}>
+    <Grid sx={{ gap: 4, display:'flex', alignItems: 'center', justifyContent:'center', marginTop: '20px'}} container>
         {
           videos.map(video => {
             return (

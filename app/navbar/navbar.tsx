@@ -11,8 +11,6 @@ import {
 } from 'react';
 import { User as FirebaseUser } from 'firebase/auth';
 import Upload from "./upload";
-import { useRouter } from 'next/navigation'
-
 
 type User = FirebaseUser & { roles: {admin?: boolean, viewer:boolean, uploader?:boolean}}
 
@@ -24,7 +22,6 @@ export default function Navbar () {
     const [hydrated, setHydrated] = useState(false); // Todo: hacky fix to fix hydration issues with text
     const {mode, setMode} = useColorScheme();
     const [user, setUser] = useState<User | null>(null);
-    const router = useRouter();
 
     const toggleColorScheme = () => {
         mode === 'dark' ? setMode('light') : setMode('dark');
@@ -61,7 +58,7 @@ export default function Navbar () {
         <>
             <nav className={styles.nav}>
                 <Link href="/">
-                    <Image src="/youtube.svg" alt="youtube logo" width={90} height={50}></Image>
+                    <Image src="/youtube.svg" alt="youtube logo" width={50} height={50}></Image>
                 </Link>
                 {user?.roles?.uploader ? <Upload></Upload> : null}
                 <Button variant="outlined" onClick={toggleColorScheme} sx={{marginLeft: 'auto', marginRight: '10px'}}>    
