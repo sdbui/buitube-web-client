@@ -1,25 +1,26 @@
-import Image from 'next/image'
 import styles from './page.module.css';
 import { getVideos } from '../utils/firebase/functions';
-import Link from 'next/link';
+
+import VideosList from './videos-list/videos-list';
+
+
+export interface Video {
+  id?: string,
+  uid?: string,
+  filename?: string,
+  status?: "processing" | "processed",
+  title?: string,
+  description?: string
+}
 
 export default async function Home() {
 
   const videos = await getVideos();
-  console.log(videos);
 
   return (
-    <main className={styles.main}>
-      {
-        videos.map(video => {
-          return (
-              <Link key={video.id} href={`/watch?v=${video.filename}`}>
-              VIDEO!!
-            </Link>
-          )
-        })
-      }
-    </main>
+      <main className={styles.main}>
+        <VideosList videos={videos}></VideosList>
+      </main>
   )
 }
 

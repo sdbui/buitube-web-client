@@ -3,6 +3,7 @@ import { functions } from './firebase'
 
 const generateUploadUrlFunction = httpsCallable(functions, 'generateUploadUrl');
 const getVideosFunction = httpsCallable(functions, 'getVideos');
+const updateVideoDetailsFunction = httpsCallable(functions, 'updateVideoDetails');
 
 // todo: move this somewhere else to share
 export interface Video {
@@ -28,11 +29,16 @@ export async function uploadVideo (file: File) {
     },
   });
 
-  return result;
+  return response?.data?.fileName;
 
 }
 
 export async function getVideos () {
   const response = await getVideosFunction();
   return response.data as Video[];
+}
+
+export async function updateVideoDetails (video: Video) {
+  const response = await updateVideoDetailsFunction({video})
+  return response.data;
 }

@@ -1,5 +1,7 @@
 'use client'
 import { useSearchParams } from 'next/navigation';
+import Sheet from '@mui/joy/Sheet';
+import styles from './watch.module.css';
 
 
 export default function Watch() {
@@ -9,10 +11,16 @@ export default function Watch() {
 
     return (
         <>
-            <h1>Watch page</h1>
-            {
-                <video width="400px" autoPlay playsInline controls src={videoPrefix + videoSrc}/>
-            }
+            <Sheet sx={{
+                height: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+            }}>
+                <video controls className={styles.videoPlayer} playsInline muted loop>
+                    <source src={videoPrefix + videoSrc} type="video/mp4"></source>
+                </video>
+            </Sheet>
         </>
     )
 }

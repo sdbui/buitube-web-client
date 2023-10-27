@@ -8,7 +8,10 @@ import {
     GoogleAuthProvider,
     onAuthStateChanged,
     User,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
 } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 import { getFunctions } from "firebase/functions";
 
 // Your web app's Firebase configuration
@@ -26,6 +29,8 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 export const functions = getFunctions()
 
+export const db = getFirestore(app);
+
 /**
  * Signs user in with google popup.
  * @returns A promise that resolves with user's credentials
@@ -33,7 +38,37 @@ export const functions = getFunctions()
 export function signInWithGoogle() {
     return signInWithPopup(auth,new GoogleAuthProvider());
 }
-// maybe add more auth options later?
+
+export async function signInViaEmailPassword(email: string, password: string) {
+  let result = null;
+  let error = null;
+  try {
+    result = await signInWithEmailAndPassword(auth, email, password);
+  } catch (e) {
+    error = e;
+  }
+
+  return { result, error };
+}
+
+/**
+ * Sign up user via email and password
+ * @param email 
+ * @param password 
+ * @returns 
+ */
+export async function signUp(email: string, password: string) {
+  let result = null;
+  let error = null;
+
+  try {
+    result = await createUserWithEmailAndPassword(auth, email, password);
+  } catch (e) {
+    error = e;
+  }
+
+  return { result, error };
+}
 
 /**
  * Signs the user out
