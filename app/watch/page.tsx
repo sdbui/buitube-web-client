@@ -40,7 +40,7 @@ export default function Watch() {
                 alignItems: 'center',
                 justifyContent: 'center',
             }}>
-                <video controls className={styles.videoPlayer} playsInline muted loop>
+                <video controls autoPlay className={styles.videoPlayer} playsInline muted>
                     <source src={videoPrefix + videoSrc} type="video/mp4"></source>
                 </video>
             </Sheet>
