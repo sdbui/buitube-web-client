@@ -86,7 +86,7 @@ export default function VideosList ({videos} : IVideos) {
             return (
               <Link key={video.id} href={`/watch?v=${video.filename}`} className={styles.cardLink}>
                 <Card className={styles.card}>
-                  <div className={styles.cardImage}>image here todo</div>
+                  <div className={styles.cardImage}></div>
                   <Typography level="title-lg">{video.title || 'Untitled'}</Typography>
                   <Typography level="body-md">{video.description || 'No Description Provided'}</Typography>
                 </Card>
