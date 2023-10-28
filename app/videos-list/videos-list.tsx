@@ -6,7 +6,6 @@ import {
   useState,
   useEffect,
 } from 'react';
-
 import { User as FirebaseUser } from 'firebase/auth';
 import Grid from '@mui/joy/Grid';
 import Link from 'next/link';
@@ -25,7 +24,7 @@ interface IVideos {
 type User = FirebaseUser & {roles: { admin?: boolean, viewer: boolean, uploader?: boolean}}
 
 export default function VideosList ({videos} : IVideos) {
-
+  const thumbnailPrefix = 'https://storage.googleapis.com/buitube-video-thumbnails'
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
@@ -80,13 +79,20 @@ export default function VideosList ({videos} : IVideos) {
   }
 
   return (
-    <Grid sx={{ gap: 4, display:'flex', alignItems: 'center', justifyContent:'center', marginTop: '20px'}} container>
+    <Grid sx={{ gap: 4, display:'flex', alignItems: 'start', justifyContent:'center', marginTop: '20px'}} container>
         {
           videos.map(video => {
             return (
-              <Link key={video.id} href={`/watch?v=${video.filename}`} className={styles.cardLink}>
+              <Link key={video.id} href={`/watch?v=${video.filename}`} className={`${styles.cardLink} ${video.status === 'processed' ? '' : styles.cardDisabled}`}>
                 <Card className={styles.card}>
-                  <div className={styles.cardImage}></div>
+                  {video?.thumbnail ? (
+                    <AspectRatio maxHeight="150px">
+                      <img height="150px" src={`${thumbnailPrefix}/${video.thumbnail}`} alt="video thumbnail"/>
+                    </AspectRatio>) : (
+                    <div className={styles.cardImage}>
+                      <Typography level="title-lg">Processsing</Typography>
+                    </div>
+                    )}
                   <Typography level="title-lg">{video.title || 'Untitled'}</Typography>
                   <Typography level="body-md">{video.description || 'No Description Provided'}</Typography>
                 </Card>

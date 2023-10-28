@@ -1,6 +1,5 @@
 .card {
   width: 300px;
-  height: 200px;
   display: flex;
   flex-direction: column;
 }
@@ -12,11 +11,18 @@
 
 .cardImage {
   width: 100%;
-  flex-basis: 50%;
+  min-height: 150px;
   background: rgb(238,174,202);
   background: linear-gradient(307deg, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .cardLink {
   text-decoration: none;
+}
+
+.cardDisabled {
+  pointer-events: none;
 }
